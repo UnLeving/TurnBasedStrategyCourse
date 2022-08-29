@@ -9,16 +9,18 @@ public class Unit : MonoBehaviour
     private void Update()
     {
         float stoppingDistance = 0.1f;
-        Vector3 moveDirestion = (targetPosition - transform.position).normalized;
-        float moveSpeed = 4f;
 
-        if (Vector3.Distance(new Vector3(4, 0, 4), transform.position) < stoppingDistance) return;
-
-        transform.position += moveSpeed * Time.deltaTime * moveDirestion;
-
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Vector3.Distance(targetPosition, transform.position) > stoppingDistance)
         {
-            Move(new Vector3(4, 0, 4));
+            Vector3 moveDirestion = (targetPosition - transform.position).normalized;
+            float moveSpeed = 4f;
+
+            transform.position += moveSpeed * Time.deltaTime * moveDirestion;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Move(MouseWorld.GetPosition());
         }
     }
 
